@@ -1,0 +1,44 @@
+﻿<!doctype>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Боровов М.С. Белов В.А.</title>
+    <head>
+
+        <body>
+            <h1>Лабораторная работа №3. Вариант №4</h1>
+            <h2>Введите предложение:</h2>
+            <p><input id="input" maxlength="70" size="40" value=""></p>
+            <a id="tag">Подсчитать</a>
+            <script>
+                const tag = document.getElementById('tag');
+                const input = document.getElementById('input');
+
+                tag.addEventListener('click', function () {
+                    var words = input.value.split(" ");
+                    var string;
+                    var count = 0;
+                    var url = new URL("http://localhost:1337/");
+
+                    if (words == 0) {
+                        string = "NULL";
+                    }
+                    else {
+                        for (var i = 0; i < words.length; i++) {
+                            if (words[i] != "") {
+                                count++;
+                                url.searchParams.set('param' + count, words[i]);
+                            }
+                        }
+                        string = "Count: " + count;
+                    }
+                    
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('GET', url);
+                    xhr.send("arra sicko mode");
+
+                    alert(string);
+                });
+            </script>
+        </body>
+</html>
